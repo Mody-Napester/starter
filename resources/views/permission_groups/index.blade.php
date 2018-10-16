@@ -36,8 +36,7 @@
                     <form class="" action="#">
                         <div class="form-group">
                             <label>Required</label>
-                            <input type="text" class="form-control" required
-                                   placeholder="Type something"/>
+                            <input type="text" class="form-control" required placeholder="Name"/>
                         </div>
 
                         <div class="form-group">
