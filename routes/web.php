@@ -17,7 +17,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 |
 */
 
-Route::group(['prefix'=>'dashboard'],function (){
+Route::group(['prefix'=>'dashboard', 'middleware' => 'auth'],function (){
     Route::get('/', 'DashboardController@index')->name('dashboard.index');
     Route::resource('permission-groups', 'PermissionGroupsController');
     Route::resource('permissions', 'PermissionsController');

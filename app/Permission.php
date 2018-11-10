@@ -27,7 +27,7 @@ class Permission extends Model
     {
         parent::boot();
         self::creating(function ($model) {
-            $model->uuid = (string) Uuid::generate(4);
+            $model->uuid = (string) \Webpatser\Uuid\Uuid::generate(4);
         });
     }
 

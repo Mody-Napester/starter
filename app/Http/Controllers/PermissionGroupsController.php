@@ -2,10 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\PermissionGroup;
 use Illuminate\Http\Request;
+use Validator;
 
 class PermissionGroupsController extends Controller
 {
+    /**
+     * Class object
+     * @var resource
+     */
+    public $resource;
+
+    /**
+     * PermissionGroupsController constructor.
+     */
+    public function __construct()
+    {
+        $this->resource = new PermissionGroup();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +29,8 @@ class PermissionGroupsController extends Controller
      */
     public function index()
     {
-        return view('permission_groups.index');
+        $data['resources'] = PermissionGroup::all();
+        return view('permission_groups.index', $data);
     }
 
     /**
@@ -34,7 +51,30 @@ class PermissionGroupsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Check permissions
+
+        // Check validation
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|unique:permission_groups'
+        ]);
+
+       // dd($validator);
+
+        if ($validator->fails()){
+            return back()->withErrors($validator)->withInput();
+        }
+
+        // Do Code
+        $resource = PermissionGroup::store([
+            'name' => $request->name,
+            'created_by' => auth()->user()->id,
+            'updated_by' => auth()->user()->id
+        ]);
+
+        // Return
+        if ($resource){
+            return back();
+        }
     }
 
     /**
