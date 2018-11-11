@@ -18,56 +18,29 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <!-- Nav Items -->
-            <ul class="nav nav-tabs navtab-bg nav-justified">
-                <li class="nav-item">
-                    <a href="#searchResource" data-toggle="tab" aria-expanded="false" class="nav-link active">Search & filter</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#createResource" data-toggle="tab" aria-expanded="true" class="nav-link">Create new</a>
-                </li>
-            </ul>
+            <div class="card-box">
+                <!-- Create new -->
+                <h4 class="m-t-0 header-title">Create new Permission Group</h4>
+                <p class="text-muted font-14 m-b-30">
+                    Create new resource from here.
+                </p>
 
-            <div class="tab-content">
-                <!-- Search -->
-                <div class="tab-pane active" id="searchResource">
-                    <form method="get" action="" enctype="multipart/form-data">
-                        {{ csrf_field() }}
+                <form method="post" action="{{ route('permission-groups.store') }}" enctype="multipart/form-data">
+                    {{ csrf_field() }}
 
-                        <div class="form-group">
-                            <label>Name</label>
-                            <input type="text" name="name" class="form-control" required placeholder="Name"/>
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" name="name" class="form-control" required placeholder="Name"/>
+                    </div>
+
+                    <div class="form-group m-b-0">
+                        <div>
+                            <button type="submit" class="btn btn-primary waves-effect waves-light">
+                                Submit
+                            </button>
                         </div>
-
-                        <div class="form-group m-b-0">
-                            <div>
-                                <button type="submit" class="btn btn-primary waves-effect waves-light">
-                                    Submit
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-                <!-- Create -->
-                <div class="tab-pane" id="createResource">
-                    <form method="post" action="{{ route('permission-groups.store') }}" enctype="multipart/form-data">
-                        {{ csrf_field() }}
-
-                        <div class="form-group">
-                            <label>Name</label>
-                            <input type="text" name="name" class="form-control" required placeholder="Name"/>
-                        </div>
-
-                        <div class="form-group m-b-0">
-                            <div>
-                                <button type="submit" class="btn btn-primary waves-effect waves-light">
-                                    Submit
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
         <!-- end card-box -->
@@ -104,12 +77,16 @@
                                 <td>{{ $resource->updatedBy->name }}</td>
                                 <td>{{ $resource->created_at }}</td>
                                 <td>
-                                    <a class="btn btn-danger btn-rounded waves-effect waves-light">
-                                        <i class="fa fa-times"></i>
-                                    </a>
-                                    <a class="btn btn-success btn-rounded waves-effect waves-light">
+                                    <button type="submit" class="btn btn-success btn-rounded waves-effect waves-light">
                                         <i class="fa fa-refresh"></i>
-                                    </a>
+                                    </button>
+                                    <form class="d-inline-block" action="{{ route('permission-groups.destroy', [$resource->uuid]) }}" method="post">
+                                        {{ csrf_field() }}
+                                        {{ method_field('DELETE') }}
+                                        <button type="submit" class="btn btn-danger btn-rounded waves-effect waves-light">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

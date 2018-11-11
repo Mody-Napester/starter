@@ -114,11 +114,20 @@ class PermissionGroupsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int  $uuid
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($uuid)
     {
-        //
+        $resource = PermissionGroup::getBy('uuid', $uuid);
+        if ($resource){
+            $deletedResource = PermissionGroup::remove($resource->id);
+
+            // Return
+            if ($deletedResource){
+                return back();
+            }
+        }
+
     }
 }
