@@ -25,6 +25,7 @@
         <link href="{{ url('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ url('assets/css/icons.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ url('assets/css/style.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ url('assets/css/custom.css') }}" rel="stylesheet" type="text/css" />
 
         <script src="{{ url('assets/js/modernizr.min.js') }}"></script>
 
@@ -302,20 +303,10 @@
         </div>
         <!-- END wrapper -->
 
-        <!--  Modal content for the above example -->
-        <div class="modal fade bs-edit-modal-lg" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="editModalLabel"></h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    </div>
-                    <div class="modal-body">
-
-                    </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
+        <!-- Update Modal -->
+        @include('_modals.update')
+        <!-- Delete Modal -->
+        @include('_modals.delete')
 
         <script>
             var resizefunc = [];
@@ -333,6 +324,7 @@
         <script src="{{ url('assets/js/wow.min.js') }}"></script>
         <script src="{{ url('assets/js/jquery.nicescroll.js') }}"></script>
         <script src="{{ url('assets/js/jquery.scrollTo.min.js') }}"></script>
+        <script src="{{ url('assets/js/script.js') }}"></script>
 
         <!-- jQuery  -->
         <script src="{{ url('assets/plugins/moment/moment.js') }}"></script>

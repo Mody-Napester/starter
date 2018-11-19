@@ -58,8 +58,6 @@ class PermissionGroupsController extends Controller
             'name' => 'required|string|unique:permission_groups'
         ]);
 
-       // dd($validator);
-
         if ($validator->fails()){
             return back()->withErrors($validator)->withInput();
         }
@@ -91,24 +89,50 @@ class PermissionGroupsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  string  $uuid
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($uuid)
     {
-        //
+        $data['resource'] = PermissionGroup::getBy('uuid', $uuid);
+        return response([
+            'title'=>'Update resource',
+            'view'=> view('permission_groups.edit', $data)->render(),
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  string  $uuid
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $uuid)
     {
-        //
+        // Check permissions
+
+        // Check validation
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|unique:permission_groups'
+        ]);
+
+        if ($validator->fails()){
+            return back()->withErrors($validator)->withInput();
+        }
+
+        // Do Code
+        $resource = PermissionGroup::getBy('uuid', $uuid);
+
+        $updatedResource = PermissionGroup::edit([
+            'name' => $request->name,
+            'updated_by' => auth()->user()->id
+        ], $resource->id);
+
+        // Return
+        if ($updatedResource){
+            return back();
+        }
     }
 
     /**

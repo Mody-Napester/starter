@@ -56,14 +56,15 @@
                     Here you will find all the resources to make actions on them.
                 </p>
 
-                <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <table id="datatable" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
                     <thead>
                         <tr>
                             <th>Id</th>
                             <th>Name</th>
                             <th>Created by</th>
-                            <th>Updated at</th>
+                            <th>Updated by</th>
                             <th>Created at</th>
+                            <th>Updated at</th>
                             <th>Control</th>
                         </tr>
                     </thead>
@@ -76,17 +77,14 @@
                                 <td>{{ $resource->createdBy->name }}</td>
                                 <td>{{ $resource->updatedBy->name }}</td>
                                 <td>{{ $resource->created_at }}</td>
+                                <td>{{ $resource->updated_at }}</td>
                                 <td>
-                                    <button type="button" class="btn btn-success btn-rounded waves-effect waves-light" data-url="{{ route('permission-groups.edit', [$resource->uuid]) }}" data-toggle="modal" data-target=".bs-edit-modal-lg">
-                                        <i class="fa fa-refresh"></i>
-                                    </button>
-                                    <form class="d-inline-block" action="{{ route('permission-groups.destroy', [$resource->uuid]) }}" method="post">
-                                        {{ csrf_field() }}
-                                        {{ method_field('DELETE') }}
-                                        <button type="submit" class="btn btn-danger btn-rounded waves-effect waves-light">
-                                            <i class="fa fa-times"></i>
-                                        </button>
-                                    </form>
+                                    <a href="{{ route('permission-groups.edit', [$resource->uuid]) }}" class="update-modal btn btn-sm btn-success">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <a href="{{ route('permission-groups.destroy', [$resource->uuid]) }}" class="confirm-delete btn btn-sm btn-danger">
+                                        <i class="fa fa-times"></i>
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach

@@ -46,8 +46,7 @@ class PermissionGroup extends Model
      */
     public static function edit($inputs, $resource)
     {
-        $resource = new PermissionGroup();
-        return $resource->where('id', $resource)->update($inputs);
+        return PermissionGroup::where('id', $resource)->update($inputs);
     }
 
     /**
