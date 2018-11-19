@@ -77,7 +77,7 @@
                                 <td>{{ $resource->updatedBy->name }}</td>
                                 <td>{{ $resource->created_at }}</td>
                                 <td>
-                                    <button type="submit" class="btn btn-success btn-rounded waves-effect waves-light">
+                                    <button type="button" class="btn btn-success btn-rounded waves-effect waves-light" data-url="{{ route('permission-groups.edit', [$resource->uuid]) }}" data-toggle="modal" data-target=".bs-edit-modal-lg">
                                         <i class="fa fa-refresh"></i>
                                     </button>
                                     <form class="d-inline-block" action="{{ route('permission-groups.destroy', [$resource->uuid]) }}" method="post">
