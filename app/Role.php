@@ -11,7 +11,7 @@ class Role extends Model
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = ['name', 'icon', 'class', 'color', 'created_by', 'updated_by'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -32,18 +32,69 @@ class Role extends Model
     }
 
     /**
+     *  Create new resource
+     */
+    public static function store($inputs)
+    {
+        return self::create($inputs);
+    }
+
+    /**
+     *  Update existing resource
+     */
+    public static function edit($inputs, $resource)
+    {
+        return self::where('id', $resource)->update($inputs);
+    }
+
+    /**
+     *  Delete existing resource
+     */
+    public static function remove($resource)
+    {
+        return self::where('id', $resource)->delete();
+    }
+
+    /**
+     *  Get a specific resource
+     */
+    public static function getBy($by, $resource)
+    {
+        return self::where($by, $resource)->first();
+    }
+
+    /**
+     *  Relationship with users
+     */
+    public function createdBy()
+    {
+        return $this->belongsTo('App\User', 'created_by');
+
+    }
+
+    /**
+     *  Relationship with users
+     */
+    public function updatedBy()
+    {
+        return $this->belongsTo('App\User', 'updated_by');
+
+    }
+
+    /**
      *  Relationship with Permissions
      */
     public function permissions()
     {
-        return $this->belongsToMany('App/Permission', 'permission_role');
+        return $this->belongsToMany('App\Permission', 'permission_role')->withPivot('permission_group_id');
     }
 
     /**
-     *  Relationship with Users
+     *  Relationship with Permission Groups
      */
-    public function users()
+    public function permissionGroups()
     {
-        return $this->belongsToMany('App/User', 'role_user');
+        return $this->belongsToMany('App\PermissionGroup', 'permission_role');
     }
+
 }
