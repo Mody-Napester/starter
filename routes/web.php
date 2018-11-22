@@ -22,4 +22,5 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'auth'],function (){
     Route::resource('permission-groups', 'PermissionGroupsController');
     Route::resource('permissions', 'PermissionsController');
     Route::resource('roles', 'RolesController');
+    Route::resource('users', 'UsersController');
 });

@@ -1,6 +1,6 @@
 @extends('_layouts.dashboard')
 
-@section('title') Roles @endsection
+@section('title') Users @endsection
 
 @section('content')
 
@@ -8,10 +8,10 @@
     <div class="row">
         <div class="col-sm-12">
 
-            <h4 class="page-title">Roles</h4>
+            <h4 class="page-title">Users</h4>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">{{ config('app.name') }}</a></li>
-                <li class="breadcrumb-item"><a href="#">Roles</a></li>
+                <li class="breadcrumb-item"><a href="#">Users</a></li>
                 <li class="breadcrumb-item active">Index</li>
             </ol>
 
@@ -22,12 +22,12 @@
         <div class="col-lg-12">
             <div class="card-box">
                 <!-- Create new -->
-                <h4 class="m-t-0 header-title">Create new Role</h4>
+                <h4 class="m-t-0 header-title">Create new User</h4>
                 <p class="text-muted font-14 m-b-30">
                     Create new resource from here.
                 </p>
 
-                @include('roles.create')
+                @include('users.create')
             </div>
         </div>
         <!-- end card-box -->
@@ -38,7 +38,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card-box table-responsive">
-                <h4 class="m-t-0 header-title">All Roles</h4>
+                <h4 class="m-t-0 header-title">All Users</h4>
                 <p class="text-muted font-14 m-b-30">
                     Here you will find all the resources to make actions on them.
                 </p>
@@ -48,7 +48,7 @@
                         <tr>
                             <th>Id</th>
                             <th>Name</th>
-                            <th>Permissions</th>
+                            <th>Roles</th>
                             <th>Created by</th>
                             <th>Updated by</th>
                             <th>Created at</th>
@@ -61,12 +61,10 @@
                         @foreach($resources as $resource)
                             <tr>
                                 <td>{{ $resource->id }}</td>
+                                <td>{{ $resource->name }}</td>
                                 <td>
-                                    <span class="label {{ $resource->class }}">{{ $resource->name }}</span>
-                                </td>
-                                <td>
-                                    @foreach($resource->permissions as $permission)
-                                        <span class="label label-default">{{ \App\PermissionGroup::getBy('id', $permission->pivot->permission_group_id)->name }}.{{ $permission->name }}</span>
+                                    @foreach($resource->roles as $role)
+                                        <span class="label {{ $role->class }}">{{ $role->name }}</span>
                                     @endforeach
                                 </td>
                                 <td>{{ $resource->createdBy->name }}</td>
@@ -74,10 +72,10 @@
                                 <td>{{ $resource->created_at }}</td>
                                 <td>{{ $resource->updated_at }}</td>
                                 <td>
-                                    <a href="{{ route('roles.edit', [$resource->uuid]) }}" class="update-modal btn btn-sm btn-success">
+                                    <a href="{{ route('users.edit', [$resource->uuid]) }}" class="update-modal btn btn-sm btn-success">
                                         <i class="fa fa-edit"></i>
                                     </a>
-                                    <a href="{{ route('roles.destroy', [$resource->uuid]) }}" class="confirm-delete btn btn-sm btn-danger">
+                                    <a href="{{ route('users.destroy', [$resource->uuid]) }}" class="confirm-delete btn btn-sm btn-danger">
                                         <i class="fa fa-times"></i>
                                     </a>
                                 </td>

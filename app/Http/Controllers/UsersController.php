@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use App\Permission;
 use App\PermissionGroup;
 use App\Role;
+use App\User;
 use Illuminate\Http\Request;
 use Validator;
 
-class RolesController extends Controller
+class UsersController extends Controller
 {
     /**
      * Class object
@@ -17,11 +18,11 @@ class RolesController extends Controller
     public $resource;
 
     /**
-     * RolessController constructor.
+     * UsersController constructor.
      */
     public function __construct()
     {
-        $this->resource = new Role();
+        $this->resource = new User();
     }
 
     /**
@@ -31,9 +32,9 @@ class RolesController extends Controller
      */
     public function index()
     {
-        $data['permissions'] = Permission::all();
-        $data['resources'] = Role::all();
-        return view('roles.index', $data);
+        $data['roles'] = Role::all();
+        $data['resources'] = User::all();
+        return view('users.index', $data);
     }
 
     /**
@@ -58,11 +59,10 @@ class RolesController extends Controller
 
         // Check validation
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|unique:roles,name',
-            'icon' => 'required|string',
-            'class' => 'required|string',
-            'color' => 'required|string',
-            'permissions-groups' => 'required'
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'phone' => 'required|max:20',
+            'password' => 'required|string|min:6',
         ]);
 
         if ($validator->fails()){
@@ -70,25 +70,19 @@ class RolesController extends Controller
         }
 
         // Do Code
-        $resource = Role::store([
+        $resource = User::store([
             'name' => $request->name,
-            'icon' => $request->icon,
-            'class' => $request->class,
-            'color' => $request->color,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'password' => bcrypt($request->password),
             'created_by' => auth()->user()->id,
             'updated_by' => auth()->user()->id
         ]);
 
         // Relation
         if ($resource){
-            foreach ($request->input('permissions-groups') as $permissions_groups){
-                $group = explode('.', $permissions_groups)[0];
-                $permission = explode('.', $permissions_groups)[1];
-
-                $resource->permissions()->attach(
-                    Permission::getBy('uuid', $permission)->id, [
-                        'permission_group_id' => PermissionGroup::getBy('uuid', $group)->id
-                ]);
+            foreach ($request->input('roles') as $role){
+                $resource->roles()->attach(Role::getBy('uuid', $role)->id);
             }
         }
 
@@ -117,11 +111,11 @@ class RolesController extends Controller
      */
     public function edit($uuid)
     {
-        $data['permissions'] = Permission::all();
-        $data['resource'] = Role::getBy('uuid', $uuid);
+        $data['roles'] = Role::all();
+        $data['resource'] = User::getBy('uuid', $uuid);
         return response([
-            'title'=>'Update resource',
-            'view'=> view('roles.edit', $data)->render(),
+            'title'=> "Update user " . $data['resource']->name,
+            'view'=> view('users.edit', $data)->render(),
         ]);
     }
 
@@ -137,15 +131,13 @@ class RolesController extends Controller
         // Check permissions
 
         // Get Resource
-        $resource = Role::getBy('uuid', $uuid);
+        $resource = User::getBy('uuid', $uuid);
 
         // Check validation
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|unique:roles,name,' . $resource->id,
-            'icon' => 'required|string',
-            'class' => 'required|string',
-            'color' => 'required|string',
-            'permissions-groups' => 'required'
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $resource->id,
+            'phone' => 'required|max:20',
         ]);
 
         if ($validator->fails()){
@@ -153,26 +145,20 @@ class RolesController extends Controller
         }
 
         // Do Code
-        $updatedResource = Role::edit([
+        $updatedResource = User::edit([
             'name' => $request->name,
-            'icon' => $request->icon,
-            'class' => $request->class,
-            'color' => $request->color,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'password' => ($request->has('password')? bcrypt($request->password) : $resource->password),
             'updated_by' => auth()->user()->id
         ], $resource->id);
 
         // Relation
-        if ($request->has('permissions-groups')){
-            $resource->permissions()->detach();
+        if ($request->has('roles')){
+            $resource->roles()->detach();
 
-            foreach ($request->input('permissions-groups') as $permissions_groups){
-                $group = explode('.', $permissions_groups)[0];
-                $permission = explode('.', $permissions_groups)[1];
-
-                $resource->permissions()->attach(
-                    Permission::getBy('uuid', $permission)->id, [
-                    'permission_group_id' => PermissionGroup::getBy('uuid', $group)->id
-                ]);
+            foreach ($request->input('roles') as $role){
+                $resource->roles()->attach(Role::getBy('uuid', $role)->id);
             }
         }
 
@@ -190,9 +176,9 @@ class RolesController extends Controller
      */
     public function destroy($uuid)
     {
-        $resource = Role::getBy('uuid', $uuid);
+        $resource = User::getBy('uuid', $uuid);
         if ($resource){
-            $deletedResource = Role::remove($resource->id);
+            $deletedResource = User::remove($resource->id);
 
             // Return
             if ($deletedResource){

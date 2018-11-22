@@ -15,9 +15,7 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'phone', 'email', 'password',
-    ];
+    protected $fillable = ['name', 'phone', 'email', 'password', 'created_by', 'updated_by'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -40,10 +38,60 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     *  Create new resource
+     */
+    public static function store($inputs)
+    {
+        return self::create($inputs);
+    }
+
+    /**
+     *  Update existing resource
+     */
+    public static function edit($inputs, $resource)
+    {
+        return self::where('id', $resource)->update($inputs);
+    }
+
+    /**
+     *  Delete existing resource
+     */
+    public static function remove($resource)
+    {
+        return self::where('id', $resource)->delete();
+    }
+
+    /**
+     *  Get a specific resource
+     */
+    public static function getBy($by, $resource)
+    {
+        return self::where($by, $resource)->first();
+    }
+
+    /**
+     *  Relationship with users
+     */
+    public function createdBy()
+    {
+        return $this->belongsTo('App\User', 'created_by');
+
+    }
+
+    /**
+     *  Relationship with users
+     */
+    public function updatedBy()
+    {
+        return $this->belongsTo('App\User', 'updated_by');
+
+    }
+
+    /**
      *  Relationship with roles
      */
     public function roles()
     {
-        return $this->belongsToMany('App/Role', 'role_user');
+        return $this->belongsToMany('App\Role', 'role_user');
     }
 }

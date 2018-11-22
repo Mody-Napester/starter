@@ -25,7 +25,7 @@
 
                 <li class="text-muted menu-title">Resources</li>
                 <li class="has_sub">
-                    <a href="#" class="waves-effect"><i class="ti-user"></i> <span> Users </span></a>
+                    <a href="{{ route('users.index') }}" class="waves-effect"><i class="ti-user"></i> <span> Users </span></a>
                 </li>
 
             </ul>

@@ -111,6 +111,10 @@
                         {{--</li>--}}
 
                         <li class="list-inline-item dropdown notification-list">
+                            @foreach(auth()->user()->roles as $role)
+                                <span class="label {{ $role->class }}">{{ $role->name }}</span>
+                            @endforeach
+
                             <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button"
                                aria-haspopup="false" aria-expanded="false">
                                 <span>Welcome {{ Auth::user()->name }}</span>
