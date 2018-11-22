@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use phpDocumentor\Reflection\Types\This;
 
 class Permission extends Model
 {
@@ -11,7 +12,7 @@ class Permission extends Model
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = ['name', 'created_by', 'updated_by'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -32,11 +33,61 @@ class Permission extends Model
     }
 
     /**
+     *  Create new resource
+     */
+    public static function store($inputs)
+    {
+        return self::create($inputs);
+    }
+
+    /**
+     *  Update existing resource
+     */
+    public static function edit($inputs, $resource)
+    {
+        return self::where('id', $resource)->update($inputs);
+    }
+
+    /**
+     *  Delete existing resource
+     */
+    public static function remove($resource)
+    {
+        return self::where('id', $resource)->delete();
+    }
+
+    /**
+     *  Get a specific resource
+     */
+    public static function getBy($by, $resource)
+    {
+        return self::where($by, $resource)->first();
+    }
+
+    /**
+     *  Relationship with users
+     */
+    public function createdBy()
+    {
+        return $this->belongsTo('App\User', 'created_by');
+
+    }
+
+    /**
+     *  Relationship with users
+     */
+    public function updatedBy()
+    {
+        return $this->belongsTo('App\User', 'updated_by');
+
+    }
+
+    /**
      *  Relationship with Permission groups
      */
     public function permission_groups()
     {
-        return $this->belongsToMany('App/PermissionGroup', 'permission_group_permission');
+        return $this->belongsToMany('App\PermissionGroup', 'permission_group_permission');
     }
 
     /**

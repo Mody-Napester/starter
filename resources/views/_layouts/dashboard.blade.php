@@ -8,10 +8,10 @@
 
         <link rel="shortcut icon" href="{{ url('assets/images/favicon.ico') }}">
 
-        <title>{{ config('app.name') }}</title>
+        <title>{{ config('app.name') }} @yield('title')</title>
 
         <!--Morris Chart CSS -->
-        <link rel="stylesheet" href="{{ url('assets/plugins/morris/morris.css') }}">
+        <link href="{{ url('assets/plugins/morris/morris.css') }}" rel="stylesheet">
         <link href="{{ url('assets/plugins/bootstrap-sweetalert/sweet-alert.css') }}" rel="stylesheet" type="text/css">
 
         <!-- DataTables -->
@@ -21,6 +21,8 @@
         <link href="{{ url('assets/plugins/datatables/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
         <!-- Multi Item Selection examples -->
         <link href="{{ url('assets/plugins/datatables/select.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+
+        <link href="{{ url('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
 
         <link href="{{ url('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ url('assets/css/icons.css') }}" rel="stylesheet" type="text/css" />
@@ -111,13 +113,11 @@
                         <li class="list-inline-item dropdown notification-list">
                             <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button"
                                aria-haspopup="false" aria-expanded="false">
+                                <span>Welcome {{ Auth::user()->name }}</span>
                                 <img src="{{ url('assets/images/users/avatar-1.jpg') }}" alt="user" class="rounded-circle">
                             </a>
                             <div class="dropdown-menu dropdown-menu-right profile-dropdown " aria-labelledby="Preview">
-                                <!-- item-->
-                                <div class="dropdown-item noti-title">
-                                    <h5 class="text-overflow"><small>Welcome ! John</small> </h5>
-                                </div>
+
 
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item">
@@ -135,9 +135,14 @@
                                 </a>
 
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <a href="{{ route('logout') }}" class="dropdown-item notify-item" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
                                     <i class="md md-settings-power"></i> <span>Logout</span>
                                 </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
 
                             </div>
                         </li>
@@ -328,6 +333,10 @@
 
         <!-- jQuery  -->
         <script src="{{ url('assets/plugins/moment/moment.js') }}"></script>
+
+        <script src="{{ url('assets/plugins/select2/js/select2.min.js') }}" type="text/javascript"></script>
+
+{{--        <script src="{{ url('assets/pages/jquery.form-advanced.init.js') }}"></script>--}}
 
         <!-- Required datatable js -->
         <script src="{{ url('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>

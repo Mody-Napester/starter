@@ -19,6 +19,9 @@
                 <li class="has_sub">
                     <a href="#" class="waves-effect"><i class="ti-user"></i> <span> Lookups </span></a>
                 </li>
+                <li class="has_sub">
+                    <a href="#" class="waves-effect"><i class="ti-settings"></i> <span> Site Modes </span></a>
+                </li>
 
                 <li class="text-muted menu-title">Resources</li>
                 <li class="has_sub">

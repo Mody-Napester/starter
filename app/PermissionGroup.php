@@ -37,8 +37,7 @@ class PermissionGroup extends Model
      */
     public static function store($inputs)
     {
-        $resource = new PermissionGroup();
-        return $resource->create($inputs);
+        return self::create($inputs);
     }
 
     /**
@@ -46,7 +45,7 @@ class PermissionGroup extends Model
      */
     public static function edit($inputs, $resource)
     {
-        return PermissionGroup::where('id', $resource)->update($inputs);
+        return self::where('id', $resource)->update($inputs);
     }
 
     /**

@@ -1,6 +1,6 @@
 @extends('_layouts.dashboard')
 
-@section('title') Permission Groups @endsection
+@section('title') Permissions @endsection
 
 @section('content')
 
@@ -8,10 +8,10 @@
     <div class="row">
         <div class="col-sm-12">
 
-            <h4 class="page-title">Permission Groups</h4>
+            <h4 class="page-title">Permissions</h4>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">{{ config('app.name') }}</a></li>
-                <li class="breadcrumb-item"><a href="#">Permission Groups</a></li>
+                <li class="breadcrumb-item"><a href="#">Permissions</a></li>
                 <li class="breadcrumb-item active">Index</li>
             </ol>
 
@@ -22,27 +22,12 @@
         <div class="col-lg-12">
             <div class="card-box">
                 <!-- Create new -->
-                <h4 class="m-t-0 header-title">Create new Permission Group</h4>
+                <h4 class="m-t-0 header-title">Create new Permission</h4>
                 <p class="text-muted font-14 m-b-30">
                     Create new resource from here.
                 </p>
 
-                <form method="post" action="{{ route('permission-groups.store') }}" enctype="multipart/form-data">
-                    {{ csrf_field() }}
-
-                    <div class="form-group">
-                        <label>Name</label>
-                        <input type="text" name="name" class="form-control" required placeholder="Name"/>
-                    </div>
-
-                    <div class="form-group m-b-0">
-                        <div>
-                            <button type="submit" class="btn btn-primary waves-effect waves-light">
-                                Submit
-                            </button>
-                        </div>
-                    </div>
-                </form>
+                @include('permissions.create')
             </div>
         </div>
         <!-- end card-box -->
@@ -53,7 +38,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card-box table-responsive">
-                <h4 class="m-t-0 header-title">All Permission Groups</h4>
+                <h4 class="m-t-0 header-title">All Permissions</h4>
                 <p class="text-muted font-14 m-b-30">
                     Here you will find all the resources to make actions on them.
                 </p>
@@ -63,6 +48,7 @@
                         <tr>
                             <th>Id</th>
                             <th>Name</th>
+                            <th>Groups</th>
                             <th>Created by</th>
                             <th>Updated by</th>
                             <th>Created at</th>
@@ -76,15 +62,20 @@
                             <tr>
                                 <td>{{ $resource->id }}</td>
                                 <td>{{ $resource->name }}</td>
+                                <td>
+                                    @foreach($resource->permission_groups as $permission_group)
+                                        <span class="label label-default">{{ $permission_group->name }}</span>
+                                    @endforeach
+                                </td>
                                 <td>{{ $resource->createdBy->name }}</td>
                                 <td>{{ $resource->updatedBy->name }}</td>
                                 <td>{{ $resource->created_at }}</td>
                                 <td>{{ $resource->updated_at }}</td>
                                 <td>
-                                    <a href="{{ route('permission-groups.edit', [$resource->uuid]) }}" class="update-modal btn btn-sm btn-success">
+                                    <a href="{{ route('permissions.edit', [$resource->uuid]) }}" class="update-modal btn btn-sm btn-success">
                                         <i class="fa fa-edit"></i>
                                     </a>
-                                    <a href="{{ route('permission-groups.destroy', [$resource->uuid]) }}" class="confirm-delete btn btn-sm btn-danger">
+                                    <a href="{{ route('permissions.destroy', [$resource->uuid]) }}" class="confirm-delete btn btn-sm btn-danger">
                                         <i class="fa fa-times"></i>
                                     </a>
                                 </td>

@@ -1,5 +1,14 @@
 $(document).ready(function(){
 
+    // Select2
+    $(".select2").select2();
+
+    $('body').on('click', '.select-all', function () {
+        var target = $(this).attr('data-select2-target');
+        $("#"+target+" > option").prop("selected",true);
+        $("#"+target).select2();
+    });
+
     var loader = '<div class="loading"><div class="loader"></div></div>';
     function addLoader() {
         $('body').append(loader);
@@ -25,6 +34,8 @@ $(document).ready(function(){
             success:function (data) {
                 targetModal.find('#editModalLabel').text(data.title);
                 targetModal.find('.modal-body').html(data.view);
+                // Select2
+                $(".select2").select2();
                 removeLoarder();
             },
             error:function () {
