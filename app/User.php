@@ -94,4 +94,34 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsToMany('App\Role', 'role_user');
     }
+
+    /**
+     *  User authorities
+     */
+    public static function authorities($user)
+    {
+        $roles = $user->roles;
+        $permissions = [];
+        foreach ($roles as $role){
+            foreach ($role->permissions as $permission){
+                $element = PermissionGroup::getBy('id', $permission->pivot->permission_group_id)->name . '.' . $permission->name;
+                if (!in_array($element, $permissions)){
+                    $permissions[] = $element;
+                }
+            }
+        }
+        return $permissions;
+    }
+
+    /**
+     *  User authorities
+     */
+    public static function hasAuthority($authority)
+    {
+        $status = false;
+        if (in_array($authority, User::authorities(auth()->user()))){
+            $status = true;
+        }
+        return $status;
+    }
 }
