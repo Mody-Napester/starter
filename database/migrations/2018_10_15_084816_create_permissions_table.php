@@ -19,7 +19,7 @@ class CreatePermissionsTable extends Migration
             $table->string('name');
             $table->integer('created_by');
             $table->integer('updated_by');
-            $table->timestamp('deleted_at');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

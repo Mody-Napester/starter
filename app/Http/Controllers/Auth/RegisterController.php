@@ -69,6 +69,9 @@ class RegisterController extends Controller
             'phone' => $data['phone'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'status' => 1,
+            'created_by' => ((isset($data['created_by']))? $data['created_by'] : 0),
+            'updated_by' => ((isset($data['updated_by']))? $data['updated_by'] : 0),
         ]);
     }
 }

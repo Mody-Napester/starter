@@ -9,7 +9,7 @@
             </div>
 
             <div class="p-20">
-                <form class="form-horizontal m-t-20" action="{{ route('register') }}">
+                <form class="form-horizontal m-t-20" method="post" action="{{ route('register') }}">
                     @csrf
 
                     <div class="form-group-custom">
