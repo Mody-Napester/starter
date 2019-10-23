@@ -49,7 +49,10 @@
     </div>
 
     <div class="form-group">
-        <label>Permission <span data-select2-target="permissions-groups_create" class="select-all text-success btn-link">(Select All)</span></label>
+        <label>Permission
+            <span data-select2-target="permissions-groups_create" class="select-all text-success btn-link">(Select All)</span>
+            <span data-select2-target="permissions-groups_create" class="de-select-all text-success btn-link">(Deselect All)</span>
+        </label>
         <select name="permissions-groups[]" id="permissions-groups_create" class="select2 select2-multiple" multiple="" data-placeholder="Choose ..." tabindex="-1" aria-hidden="true" required>
             @foreach($permissions as $permission)
                 @foreach($permission->permission_groups as $permission_group)

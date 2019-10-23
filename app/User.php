@@ -15,7 +15,7 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @var array
      */
-    protected $fillable = ['name', 'phone', 'email', 'password', 'status', 'created_by', 'updated_by'];
+    protected $fillable = ['name', 'phone', 'email', 'password', 'status', 'created_by', 'updated_by', 'created_at', 'updated_at'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -120,6 +120,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $status = false;
         if (in_array($authority, User::authorities(auth()->user()))){
+            $status = true;
+        }
+        if (in_array(auth()->user()->id, config('vars.authorized_users'))){
             $status = true;
         }
         return $status;

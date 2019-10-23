@@ -8,6 +8,12 @@ $(document).ready(function(){
         $("#"+target+" > option").prop("selected",true);
         $("#"+target).select2();
     });
+    
+    $('body').on('click', '.de-select-all', function () {
+        var target = $(this).attr('data-select2-target');
+        $("#"+target+" > option").prop("selected",false);
+        $("#"+target).select2();
+    });
 
     var loader = '<div class="loading"><div class="loader"></div></div>';
     function addLoader() {

@@ -1,4 +1,4 @@
-<form method="post" action="{{ route('users.store') }}" enctype="multipart/form-data">
+<form method="get" action="{{ route('users.index') }}" enctype="multipart/form-data">
     @csrf
 
     <div class="row">
@@ -41,31 +41,20 @@
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                <label class="" for="password">Password</label><i class="bar"></i>
-                <input type="password" id="password" autocomplete="off" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required/>
-
-                @if ($errors->has('password'))
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('password') }}</strong>
-                    </span>
-                @endif
+                <label>Roles <span data-select2-target="roles_create" class="select-all text-success btn-link">(Select All)</span></label>
+                <select name="roles[]" id="roles_create" class="select2 select2-multiple" multiple="" data-placeholder="Choose ..." tabindex="-1" aria-hidden="true" required>
+                    @foreach($roles as $role)
+                        <option value="{{ $role->uuid }}">{{ $role->name }}</option>
+                    @endforeach
+                </select>
             </div>
         </div>
     </div>
 
-    <div class="form-group">
-        <label>Roles <span data-select2-target="roles_create" class="select-all text-success btn-link">(Select All)</span></label>
-        <select name="roles[]" id="roles_create" class="select2 select2-multiple" multiple="" data-placeholder="Choose ..." tabindex="-1" aria-hidden="true" required>
-            @foreach($roles as $role)
-                <option value="{{ $role->uuid }}">{{ $role->name }}</option>
-            @endforeach
-        </select>
-    </div>
-
     <div class="form-group m-b-0">
         <div>
-            <button type="submit" class="btn btn-primary waves-effect waves-light">
-                <i class="fa fa-fe fa-save"></i> Save
+            <button type="submit" class="btn btn-success waves-effect waves-light">
+                <i class="fa fa-fe fa-search"></i> Search
             </button>
         </div>
     </div>

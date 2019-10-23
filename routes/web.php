@@ -1,4 +1,12 @@
 <?php
+Route::group(
+    ['middleware' => ['cors']
+    ],function (){
+
+});
+
+// Site Languages
+Route::get('language/{language}', 'LanguagesController@setLanguage')->name('language');
 
 Route::get('/', function () {
     return view('welcome');
@@ -23,4 +31,13 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'auth'],function (){
     Route::resource('permissions', 'PermissionsController');
     Route::resource('roles', 'RolesController');
     Route::resource('users', 'UsersController');
+
+    // User update data
+    Route::get('user/profile', 'UsersController@showUserProfile')->name('users.showUserProfile');
+
+    // Update password
+    Route::put('users/{user}/update_password', 'UsersController@updatePassword')->name('users.update_password');
+
+    // Reset password
+    Route::get('users/{user}/reset_password', 'UsersController@resetPassword')->name('users.reset_password');
 });

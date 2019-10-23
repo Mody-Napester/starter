@@ -8,7 +8,10 @@
     </div>
 
     <div class="form-group">
-        <label>Permission Groups <span data-select2-target="permission_groups_update" class="select-all text-success btn-link">(Select All)</span></label>
+        <label>Permission Groups
+            <span data-select2-target="permission_groups_update" class="select-all text-success btn-link">(Select All)</span>
+            <span data-select2-target="permission_groups_update" class="de-select-all text-success btn-link">(Deselect All)</span>
+        </label>
         <select name="permission_groups[]" id="permission_groups_update" class="select2 select2-multiple" multiple="" data-placeholder="Choose ..." tabindex="-1" aria-hidden="true" required>
             @foreach($groups as $group)
                 <option @if(in_array($group->id, $resource->permission_groups->pluck('id')->toArray() )) selected @endif value="{{ $group->uuid }}">{{ $group->name }}</option>

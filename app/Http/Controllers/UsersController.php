@@ -107,6 +107,15 @@ class UsersController extends Controller
     }
 
     /**
+     * Show user profile.
+     */
+    public function showUserProfile()
+    {
+        $data['user'] = User::getBy('id', auth()->user()->id);
+        return view('users.profile.show', $data);
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  string  $uuid
@@ -188,6 +197,74 @@ class UsersController extends Controller
                 return back();
             }
         }
+
+    }
+
+    /**
+     * Reset Password
+     */
+    public function resetPassword($user)
+    {
+        // Check permissions
+//        if (!User::hasAuthority('index.user')){
+//            return redirect('/');
+//        }
+
+        // Get Resource
+        $resource = User::getBy('uuid', $user);
+
+        if($resource){
+            $resource->password = bcrypt(config('vars.default_password'));
+            $resource->save();
+
+            $data['message'] = [
+                'msg_status' => 1,
+                'type' => 'success',
+                'text' => 'Password Has been reset successfully',
+            ];
+        }else{
+            $data['message'] = [
+                'msg_status' => 0,
+                'type' => 'danger',
+                'text' => 'Sorry! User not exists.',
+            ];
+        }
+
+        return back()->with('message', $data['message']);
+
+    }
+
+    /**
+     * Update Password
+     */
+    public function updatePassword(Request $request,$user)
+    {
+        // Check permissions
+//        if (!User::hasAuthority('index.user')){
+//            return redirect('/');
+//        }
+
+        // Get Resource
+        $resource = User::getBy('uuid', $user);
+
+        if($resource){
+            $resource->password = bcrypt($request->password);
+            $resource->save();
+
+            $data['message'] = [
+                'msg_status' => 1,
+                'type' => 'success',
+                'text' => 'Password updated successfully',
+            ];
+        }else{
+            $data['message'] = [
+                'msg_status' => 0,
+                'type' => 'danger',
+                'text' => 'Sorry! User not exists.',
+            ];
+        }
+
+        return back()->with('message', $data['message']);
 
     }
 }
