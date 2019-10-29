@@ -3,30 +3,35 @@
     {{ method_field('PUT') }}
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="form-group">
-                <label>Name</label>
-                <input type="text" name="name" class="form-control" required placeholder="Name" value="{{ $resource->name }}"/>
+                <label>Role name</label>
+                <input type="text" name="name" class="form-control" required placeholder="Role name" value="{{ $resource->name }}"/>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label>Icon</label>
-                <input type="text" name="icon" class="form-control" required placeholder="Icon" value="{{ $resource->icon }}"/>
-            </div>
-        </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="form-group">
                 <label>Class</label>
-                <input type="text" name="class" class="form-control" required placeholder="Class" value="{{ $resource->class }}"/>
+                <select name="class" id="class" class="select2 select2-multiple" data-placeholder="Choose ..." tabindex="-1" aria-hidden="true" required>
+                    @foreach(App\Enums\LabelClasses::$classes as $key => $class)
+                        <option @if($resource->class == $class) selected @endif value="{{ $class }}">{{ str_well($class) }}</option>
+                    @endforeach
+                </select>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="form-group">
                 <label>Color</label>
                 <input type="text" name="color" class="form-control" required placeholder="Color" value="{{ $resource->color }}"/>
             </div>
         </div>
+
+        {{--<div class="col-md-6">--}}
+            {{--<div class="form-group">--}}
+                {{--<label>Icon</label>--}}
+                {{--<input type="text" name="icon" class="form-control" required placeholder="Icon" value="{{ $resource->icon }}"/>--}}
+            {{--</div>--}}
+        {{--</div>--}}
     </div>
 
     <div class="form-group">
@@ -34,15 +39,37 @@
             <span data-select2-target="permissions-groups_update" class="select-all text-success btn-link">(Select All)</span>
             <span data-select2-target="permissions-groups_update" class="de-select-all text-success btn-link">(Deselect All)</span>
         </label>
-        <select name="permissions-groups[]" id="permissions-groups_update" class="select2 select2-multiple" multiple="" data-placeholder="Choose ..." tabindex="-1" aria-hidden="true" required>
+
+        <div style="border:1px solid #dddddd;padding: 10px;border-radius: 5px;">
             @foreach($permissions as $permission)
-                @foreach($permission->permission_groups as $permission_group)
-                    <option @if(in_array($permission->id, $resource->permissions->pluck('id')->toArray()) &&
-                     in_array($permission_group->id, $resource->permissionGroups->pluck('id')->toArray())) selected @endif
-                    value="{{ $permission_group->uuid }}.{{ $permission->uuid }}">{{ $permission_group->name }}.{{ $permission->name }}</option>
-                @endforeach
+                <div class="text-primary mb-2">{{ str_well($permission->name) }}</div>
+                <div class="row mb-2">
+                    @foreach($permission->permission_groups as $permission_group)
+                        <div class="col-md-3 all-checkbox">
+                            <label for="{{ $permission_group->uuid }}.{{ $permission->uuid }}">
+                                <input @if(in_array($permission->id, $resource->permissions()->pluck('id')->toArray()) &&
+                                in_array($permission_group->id, $resource->permissionGroups()->pluck('id')->toArray())) checked @endif
+
+                                type="checkbox" name="permissions-groups[]"
+                                       id="{{ $permission_group->uuid }}.{{ $permission->uuid }}"
+                                       value="{{ $permission_group->uuid }}.{{ $permission->uuid }}">
+                                {{ str_well($permission_group->name) }}
+                            </label>
+                        </div>
+                    @endforeach
+                </div>
             @endforeach
-        </select>
+        </div>
+
+        {{--<select name="permissions-groups[]" id="permissions-groups_update" class="select2 select2-multiple" multiple="" data-placeholder="Choose ..." tabindex="-1" aria-hidden="true" required>--}}
+            {{--@foreach($permissions as $permission)--}}
+                {{--@foreach($permission->permission_groups as $permission_group)--}}
+                    {{--<option @if(in_array($permission->id, $resource->permissions->pluck('id')->toArray()) &&--}}
+                     {{--in_array($permission_group->id, $resource->permissionGroups->pluck('id')->toArray())) selected @endif--}}
+                    {{--value="{{ $permission_group->uuid }}.{{ $permission->uuid }}">{{ $permission_group->name }}.{{ $permission->name }}</option>--}}
+                {{--@endforeach--}}
+            {{--@endforeach--}}
+        {{--</select>--}}
     </div>
 
     <div class="form-group m-b-0">

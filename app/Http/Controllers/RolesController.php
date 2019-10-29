@@ -54,12 +54,13 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
+//        dd($request->all());
         // Check permissions
 
         // Check validation
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|unique:roles,name',
-            'icon' => 'required|string',
+//            'icon' => 'required|string',
             'class' => 'required|string',
             'color' => 'required|string',
             'permissions-groups' => 'required'
@@ -72,7 +73,7 @@ class RolesController extends Controller
         // Do Code
         $resource = Role::store([
             'name' => $request->name,
-            'icon' => $request->icon,
+            'icon' => (($request->has('icon')? $request->icon : 'any')),
             'class' => $request->class,
             'color' => $request->color,
             'created_by' => auth()->user()->id,
@@ -142,7 +143,7 @@ class RolesController extends Controller
         // Check validation
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|unique:roles,name,' . $resource->id,
-            'icon' => 'required|string',
+//            'icon' => 'required|string',
             'class' => 'required|string',
             'color' => 'required|string',
             'permissions-groups' => 'required'
@@ -155,7 +156,7 @@ class RolesController extends Controller
         // Do Code
         $updatedResource = Role::edit([
             'name' => $request->name,
-            'icon' => $request->icon,
+//            'icon' => $request->icon,
             'class' => $request->class,
             'color' => $request->color,
             'updated_by' => auth()->user()->id

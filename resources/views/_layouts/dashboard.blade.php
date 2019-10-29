@@ -247,113 +247,113 @@
             <!-- ============================================================== -->
 
             <!-- Right Sidebar -->
-            <div class="side-bar right-bar nicescroll">
-                <h4 class="text-center">Chat</h4>
-                <div class="contact-list nicescroll">
-                    <ul class="list-group contacts-list">
-                        <li class="list-group-item">
-                            <a href="#">
-                                <div class="avatar">
-                                    <img src="assets/images/users/avatar-1.jpg" alt="">
-                                </div>
-                                <span class="name">Chadengle</span>
-                                <i class="fa fa-circle online"></i>
-                            </a>
-                            <span class="clearfix"></span>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#">
-                                <div class="avatar">
-                                    <img src="assets/images/users/avatar-2.jpg" alt="">
-                                </div>
-                                <span class="name">Tomaslau</span>
-                                <i class="fa fa-circle online"></i>
-                            </a>
-                            <span class="clearfix"></span>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#">
-                                <div class="avatar">
-                                    <img src="assets/images/users/avatar-3.jpg" alt="">
-                                </div>
-                                <span class="name">Stillnotdavid</span>
-                                <i class="fa fa-circle online"></i>
-                            </a>
-                            <span class="clearfix"></span>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#">
-                                <div class="avatar">
-                                    <img src="assets/images/users/avatar-4.jpg" alt="">
-                                </div>
-                                <span class="name">Kurafire</span>
-                                <i class="fa fa-circle online"></i>
-                            </a>
-                            <span class="clearfix"></span>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#">
-                                <div class="avatar">
-                                    <img src="assets/images/users/avatar-5.jpg" alt="">
-                                </div>
-                                <span class="name">Shahedk</span>
-                                <i class="fa fa-circle away"></i>
-                            </a>
-                            <span class="clearfix"></span>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#">
-                                <div class="avatar">
-                                    <img src="assets/images/users/avatar-6.jpg" alt="">
-                                </div>
-                                <span class="name">Adhamdannaway</span>
-                                <i class="fa fa-circle away"></i>
-                            </a>
-                            <span class="clearfix"></span>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#">
-                                <div class="avatar">
-                                    <img src="assets/images/users/avatar-7.jpg" alt="">
-                                </div>
-                                <span class="name">Ok</span>
-                                <i class="fa fa-circle away"></i>
-                            </a>
-                            <span class="clearfix"></span>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#">
-                                <div class="avatar">
-                                    <img src="assets/images/users/avatar-8.jpg" alt="">
-                                </div>
-                                <span class="name">Arashasghari</span>
-                                <i class="fa fa-circle offline"></i>
-                            </a>
-                            <span class="clearfix"></span>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#">
-                                <div class="avatar">
-                                    <img src="assets/images/users/avatar-9.jpg" alt="">
-                                </div>
-                                <span class="name">Joshaustin</span>
-                                <i class="fa fa-circle offline"></i>
-                            </a>
-                            <span class="clearfix"></span>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#">
-                                <div class="avatar">
-                                    <img src="assets/images/users/avatar-10.jpg" alt="">
-                                </div>
-                                <span class="name">Sortino</span>
-                                <i class="fa fa-circle offline"></i>
-                            </a>
-                            <span class="clearfix"></span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            {{--<div class="side-bar right-bar nicescroll">--}}
+                {{--<h4 class="text-center">Chat</h4>--}}
+                {{--<div class="contact-list nicescroll">--}}
+                    {{--<ul class="list-group contacts-list">--}}
+                        {{--<li class="list-group-item">--}}
+                            {{--<a href="#">--}}
+                                {{--<div class="avatar">--}}
+                                    {{--<img src="assets/images/users/avatar-1.jpg" alt="">--}}
+                                {{--</div>--}}
+                                {{--<span class="name">Chadengle</span>--}}
+                                {{--<i class="fa fa-circle online"></i>--}}
+                            {{--</a>--}}
+                            {{--<span class="clearfix"></span>--}}
+                        {{--</li>--}}
+                        {{--<li class="list-group-item">--}}
+                            {{--<a href="#">--}}
+                                {{--<div class="avatar">--}}
+                                    {{--<img src="assets/images/users/avatar-2.jpg" alt="">--}}
+                                {{--</div>--}}
+                                {{--<span class="name">Tomaslau</span>--}}
+                                {{--<i class="fa fa-circle online"></i>--}}
+                            {{--</a>--}}
+                            {{--<span class="clearfix"></span>--}}
+                        {{--</li>--}}
+                        {{--<li class="list-group-item">--}}
+                            {{--<a href="#">--}}
+                                {{--<div class="avatar">--}}
+                                    {{--<img src="assets/images/users/avatar-3.jpg" alt="">--}}
+                                {{--</div>--}}
+                                {{--<span class="name">Stillnotdavid</span>--}}
+                                {{--<i class="fa fa-circle online"></i>--}}
+                            {{--</a>--}}
+                            {{--<span class="clearfix"></span>--}}
+                        {{--</li>--}}
+                        {{--<li class="list-group-item">--}}
+                            {{--<a href="#">--}}
+                                {{--<div class="avatar">--}}
+                                    {{--<img src="assets/images/users/avatar-4.jpg" alt="">--}}
+                                {{--</div>--}}
+                                {{--<span class="name">Kurafire</span>--}}
+                                {{--<i class="fa fa-circle online"></i>--}}
+                            {{--</a>--}}
+                            {{--<span class="clearfix"></span>--}}
+                        {{--</li>--}}
+                        {{--<li class="list-group-item">--}}
+                            {{--<a href="#">--}}
+                                {{--<div class="avatar">--}}
+                                    {{--<img src="assets/images/users/avatar-5.jpg" alt="">--}}
+                                {{--</div>--}}
+                                {{--<span class="name">Shahedk</span>--}}
+                                {{--<i class="fa fa-circle away"></i>--}}
+                            {{--</a>--}}
+                            {{--<span class="clearfix"></span>--}}
+                        {{--</li>--}}
+                        {{--<li class="list-group-item">--}}
+                            {{--<a href="#">--}}
+                                {{--<div class="avatar">--}}
+                                    {{--<img src="assets/images/users/avatar-6.jpg" alt="">--}}
+                                {{--</div>--}}
+                                {{--<span class="name">Adhamdannaway</span>--}}
+                                {{--<i class="fa fa-circle away"></i>--}}
+                            {{--</a>--}}
+                            {{--<span class="clearfix"></span>--}}
+                        {{--</li>--}}
+                        {{--<li class="list-group-item">--}}
+                            {{--<a href="#">--}}
+                                {{--<div class="avatar">--}}
+                                    {{--<img src="assets/images/users/avatar-7.jpg" alt="">--}}
+                                {{--</div>--}}
+                                {{--<span class="name">Ok</span>--}}
+                                {{--<i class="fa fa-circle away"></i>--}}
+                            {{--</a>--}}
+                            {{--<span class="clearfix"></span>--}}
+                        {{--</li>--}}
+                        {{--<li class="list-group-item">--}}
+                            {{--<a href="#">--}}
+                                {{--<div class="avatar">--}}
+                                    {{--<img src="assets/images/users/avatar-8.jpg" alt="">--}}
+                                {{--</div>--}}
+                                {{--<span class="name">Arashasghari</span>--}}
+                                {{--<i class="fa fa-circle offline"></i>--}}
+                            {{--</a>--}}
+                            {{--<span class="clearfix"></span>--}}
+                        {{--</li>--}}
+                        {{--<li class="list-group-item">--}}
+                            {{--<a href="#">--}}
+                                {{--<div class="avatar">--}}
+                                    {{--<img src="assets/images/users/avatar-9.jpg" alt="">--}}
+                                {{--</div>--}}
+                                {{--<span class="name">Joshaustin</span>--}}
+                                {{--<i class="fa fa-circle offline"></i>--}}
+                            {{--</a>--}}
+                            {{--<span class="clearfix"></span>--}}
+                        {{--</li>--}}
+                        {{--<li class="list-group-item">--}}
+                            {{--<a href="#">--}}
+                                {{--<div class="avatar">--}}
+                                    {{--<img src="assets/images/users/avatar-10.jpg" alt="">--}}
+                                {{--</div>--}}
+                                {{--<span class="name">Sortino</span>--}}
+                                {{--<i class="fa fa-circle offline"></i>--}}
+                            {{--</a>--}}
+                            {{--<span class="clearfix"></span>--}}
+                        {{--</li>--}}
+                    {{--</ul>--}}
+                {{--</div>--}}
+            {{--</div>--}}
             <!-- /Right-bar -->
 
         </div>
@@ -396,7 +396,7 @@
         <script src="{{ url('assets/plugins/datatables/dataTables.buttons.min.js') }}"></script>
         <script src="{{ url('assets/plugins/datatables/buttons.bootstrap4.min.js') }}"></script>
         <script src="{{ url('assets/plugins/datatables/jszip.min.js') }}"></script>
-        <script src="{{ url('assets/plugins/datatables/pdfmake.min.') }}"></script>
+        <script src="{{ url('assets/plugins/datatables/pdfmake.min.js') }}"></script>
         <script src="{{ url('assets/plugins/datatables/vfs_fonts.js') }}"></script>
         <script src="{{ url('assets/plugins/datatables/buttons.html5.min.js') }}"></script>
         <script src="{{ url('assets/plugins/datatables/buttons.print.min.js') }}"></script>
@@ -411,16 +411,16 @@
         <!-- Selection table -->
         <script src="{{ url('assets/plugins/datatables/dataTables.select.min.js') }}"></script>
 
-        <script src="{{ url('assets/plugins/morris/morris.min.js') }}"></script>
-        <script src="{{ url('assets/plugins/raphael/raphael-min.js') }}"></script>
+        {{--<script src="{{ url('assets/plugins/morris/morris.min.js') }}"></script>--}}
+        {{--<script src="{{ url('assets/plugins/raphael/raphael-min.js') }}"></script>--}}
 
         <script src="{{ url('assets/plugins/bootstrap-sweetalert/sweet-alert.min.js') }}"></script>
 
         <!-- Todojs  -->
-        <script src="{{ url('assets/pages/jquery.todo.js') }}"></script>
+{{--        <script src="{{ url('assets/pages/jquery.todo.js') }}"></script>--}}
 
         <!-- chatjs  -->
-        <script src="{{ url('assets/pages/jquery.chat.js') }}"></script>
+{{--        <script src="{{ url('assets/pages/jquery.chat.js') }}"></script>--}}
 
         <script src="{{ url('assets/plugins/peity/jquery.peity.min.js') }}"></script>
 
@@ -431,7 +431,7 @@
         <script src="{{ url('assets/plugins/parsleyjs/parsley.min.js') }}"></script>
 
         <!-- dashboard_2  -->
-        <script src="{{ url('assets/pages/jquery.dashboard_2.js') }}"></script>
+{{--        <script src="{{ url('assets/pages/jquery.dashboard_2.js') }}"></script>--}}
 
         <script src="{{ url('assets/js/loader.js') }}"></script>
         <script src="{{ url('assets/js/alerts.js') }}"></script>

@@ -5,14 +5,24 @@ $(document).ready(function(){
 
     $('body').on('click', '.select-all', function () {
         var target = $(this).attr('data-select2-target');
+
+        // Select
         $("#"+target+" > option").prop("selected",true);
         $("#"+target).select2();
+
+        // Checkbox
+        $(".all-checkbox input").prop("checked",true);
     });
     
     $('body').on('click', '.de-select-all', function () {
         var target = $(this).attr('data-select2-target');
+
+        // Select
         $("#"+target+" > option").prop("selected",false);
         $("#"+target).select2();
+
+        // Checkbox
+        $(".all-checkbox input").prop("checked",false);
     });
 
     var loader = '<div class="loading"><div class="loader"></div></div>';

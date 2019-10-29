@@ -94,7 +94,7 @@ class Role extends Model
      */
     public function permissionGroups()
     {
-        return $this->belongsToMany('App\PermissionGroup', 'permission_role');
+        return $this->belongsToMany('App\PermissionGroup', 'permission_role')->withPivot('permission_id');
     }
 
 }
