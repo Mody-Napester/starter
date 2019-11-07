@@ -47,8 +47,8 @@
                     @foreach($permission->permission_groups as $permission_group)
                         <div class="col-md-3 all-checkbox">
                             <label for="{{ $permission_group->uuid }}.{{ $permission->uuid }}">
-                                <input @if(in_array($permission->id, $resource->permissions()->pluck('id')->toArray()) &&
-                                in_array($permission_group->id, $resource->permissionGroups()->pluck('id')->toArray())) checked @endif
+                                <input @if(in_array($permission->id, $resource->permissions->pluck('id')->toArray()) &&
+                                in_array($permission_group->id, $resource->permissionGroups->pluck('id')->toArray())) checked @endif
 
                                 type="checkbox" name="permissions-groups[]"
                                        id="{{ $permission_group->uuid }}.{{ $permission->uuid }}"
